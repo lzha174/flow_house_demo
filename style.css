@@ -1,0 +1,62 @@
+/* Reset some basics */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: #f9f9f9;
+  padding: 1rem;
+}
+
+header {
+  background: #004d99;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+header nav a {
+  color: white;
+  margin: 0 1rem;
+  text-decoration: none;
+}
+
+.hero {
+  background: #e6f2ff;
+  padding: 2rem;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+section {
+  margin: 1.5rem 0;
+}
+
+footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ccc;
+  text-align: center;
+}
+
+.project-list {
+  list-style: none;
+}
+
+.project-list li {
+  background: white;
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.project-list a {
+  color: #004d99;
+  text-decoration: none;
+}
