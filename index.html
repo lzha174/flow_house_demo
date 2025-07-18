@@ -5,10 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>My Portfolio</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    header {
+      background-color: #1f1f1f;
+      padding: 2rem;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 3rem;
+      color: #00bcd4;
+    }
+    nav a {
+      color: #cccccc;
+      margin: 0 1rem;
+      text-decoration: none;
+    }
+    section {
+      margin: 2rem;
+      padding: 1rem;
+      border-radius: 8px;
+      background-color: #1e1e1e;
+    }
+    h2 {
+      color: #00bcd4;
+    }
+    ul {
+      list-style-type: '✅ ';
+      padding-left: 1.5rem;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background-color: #1f1f1f;
+    }
+    a {
+      color: #80cbc4;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>My Name</h1>
+    <h1>Flow House</h1>
     <nav>
       <a href="index.html">Home</a>
       <a href="#contact">Contact</a>
@@ -16,19 +58,23 @@
   </header>
 
   <main>
-    <section class="hero">
-      <h2>FlowHouse: Discrete Event Simulation for Process Optimization</h2>
+    <section id="introduction">
+      <h2>Introduction</h2>
       <p>
-        FlowHouse is a powerful discrete event simulation package designed to optimize complex process flows.
-        It builds on the strengths of my previous project, <strong>HealthCare Acute Flow</strong>, with major improvements:
+        Flow House is a powerful discrete event simulation package designed to optimize complex process flows.
+        It is an improvement over my earlier project, <strong>HealthCare Acute Flow</strong>.
       </p>
+    </section>
+
+    <section id="improvements">
+      <h2>Major Improvements</h2>
       <ul>
-        <li>🧠 <strong>Multi-resource handling</strong>: Jobs can require staff with diverse skill sets, improving real-world applicability.</li>
-        <li>⚙️ <strong>Smarter job dispatch</strong>: Enhanced logic allows efficient scheduling beyond the previous one-staff-per-job limitation.</li>
-        <li>📦 <strong>Petri net modeling with Snakes</strong>: Simplifies workflow design and visualization compared to PM4Py.</li>
+        <li><strong>Multi-resource handling:</strong> Jobs can require multiple staff members with different skills.</li>
+        <li><strong>Smarter job dispatch:</strong> Enhanced logic for scheduling compared to the old one-staff-per-job rule.</li>
+        <li><strong>Petri net modeling with Snakes:</strong> Easier and more intuitive workflow design than PM4Py.</li>
       </ul>
       <p>
-        Built in Python with Streamlit dashboards and flexible JSON job profiles, FlowHouse is aimed at researchers and engineers seeking clarity in process bottlenecks and resource planning.
+        Built with Python, SimPy, and Streamlit, Flow House uses JSON job profiles and dashboards tailored for researchers and engineers.
       </p>
     </section>
 
