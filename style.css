@@ -8,15 +8,15 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
-  color: #333;
-  background: #f9f9f9;
+  color: #e0e0e0;
+  background: #1e1e1e;
   padding: 1rem;
   max-width: 960px;
   margin: 0 auto;
 }
 
 header {
-  background: #004d99;
+  background: #121212;
   color: white;
   padding: 1rem;
   text-align: center;
@@ -25,24 +25,44 @@ header {
 }
 
 header nav a {
-  color: white;
+  color: #111;
   margin: 0 1rem;
   text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s;
+  font-weight: 500;
+  font-size: 1.1rem;
 }
 
 header nav a:hover {
-  color: #ffcc00;
+  text-decoration: underline;
 }
 
 .hero {
-  background: #e6f2ff;
+  background: #2c2c2c;
   padding: 2rem;
   margin: 1rem 0;
-  text-align: center;
+  text-align: left;
   border-radius: 6px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.logo {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #00bcd4;
+  margin-bottom: 1rem;
+}
+
+.intro-section, .improvements-section {
+  background: #2a2a2a;
+  padding: 1.5rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  margin-bottom: 2rem;
+}
+
+.improvements-section ul {
+  list-style: disc inside;
+  color: #c0c0c0;
 }
 
 section {
