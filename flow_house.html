@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flow House</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #ffffff;
+            color: #111111;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #f0f0f0;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+        section {
+            max-width: 960px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        h2 {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        .image-pair {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .image-pair img {
+            width: 100%;
+            max-width: 48%;
+            border: 1px solid #ccc;
+        }
+        .feature-boxes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .feature-box {
+            flex: 1 1 calc(50% - 20px);
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-left: 4px solid #222;
+        }
+        footer {
+            background-color: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Flow House</h1>
+    <p>A Discrete Event Simulation Framework for Process Optimization</p>
+</header>
+<section>
+    <h2>Introduction</h2>
+    <p>
+        Flow House is a powerful discrete event simulation tool designed to optimize complex processes involving concurrent events. 
+        It enables precise modeling of real-world concurrent tasks to improve efficiency and decision quality.
+        <br><br>
+        This framework is an enhanced version of my earlier project, <strong>HealthCare Acute Flow</strong>.
+    </p>
+</section>
+
+
+
+<section>
+    <h2>What Flow House Can Optimize</h2>
+    <div class="feature-boxes">
+        <div class="feature-box">
+            <h3>Roster Optimization</h3>
+            <p>Optimize staff allocation across shifts to ensure the right mix of skills are available at the right times.</p>
+        </div>
+        <div class="feature-box">
+            <h3>Job Arrival Optimization</h3>
+            <p>Test different job arrival patterns to balance workload and reduce bottlenecks.</p>
+        </div>
+        <div class="feature-box">
+            <h3>Workflow Strategy Optimization</h3>
+            <p>Experiment with alternative job workflows and transitions to improve overall efficiency.</p>
+        </div>
+        <div class="feature-box">
+            <h3>Stress Testing</h3>
+            <p>Use synthetic data to simulate high-demand scenarios and assess system robustness.</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Major Improvements</h2>
+    <div class="feature-boxes">
+        <div class="feature-box">
+            <h3>Multi-Resource Support</h3>
+            <p>Jobs can request multiple staff members with different skills. Previously, jobs could only be handled by one staff at a time.</p>
+        </div>
+        <div class="feature-box">
+            <h3>Smarter Job Dispatch</h3>
+            <p>Dispatch logic has been improved to account for multi-resource allocation needs and priority-based scheduling.</p>
+        </div>
+        <div class="feature-box">
+            <h3>Petri Net with Snakes</h3>
+            <p>Flow logic is built using the <code>snakes</code> library instead of <code>pm4py</code>, improving usability and flexibility.</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Origins</h2>
+    <p>Below are visuals from my earlier project <em>HealthCare Acute Flow</em>, built in collaboration with Arkturus:</p>
+    <div class="image-pair">
+        <img src="acute_flow_1.png" alt="Acute Flow Visual 1">
+        <img src="actue_flow_2.png" alt="Acute Flow Visual 2">
+    </div>
+    <p style="font-size: 0.85rem; margin-top: 10px;">Images courtesy of <a href="https://www.arkturushealth.co/acute-flow" target="_blank">Arkturus Health</a>.</p>
+</section>
+
+<footer>
+    <p>&copy; 2025 Oddo Zhang. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

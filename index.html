@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Flow House</title>
+  <title>Oddo Zhang Projects</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -17,152 +17,74 @@
 
     header {
       background-color: #fff;
-      padding: 1.5rem 1rem;
+      padding: 2rem 1rem 1rem;
       text-align: center;
       border-bottom: 3px solid #333;
     }
 
     header h1 {
-      font-size: 4rem;
-      font-weight: 600;
-      color: #111;
+      font-size: 3rem;
       margin: 0;
     }
 
-    nav {
-      margin-top: 1rem;
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
     }
 
-    nav a {
-      color: #333;
-      margin: 0 1.5rem;
-      text-decoration: none;
-      font-size: 1.1rem;
+    .project-links {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
     }
 
-    section {
-      margin: 3rem auto;
-      padding: 2rem;
-      border-radius: 10px;
-      background-color: #f9f9f9;
-      max-width: 960px;
-    }
-
-    h2 {
-      color: #111;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 0.5rem;
-    }
-
-    ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
-
-    ul li::before {
-      content: '✔️';
-      color: #111;
-      margin-right: 0.5rem;
-    }
-
-    footer {
+    .project-card {
+      background: #f9f9f9;
+      padding: 1.5rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
       text-align: center;
-      padding: 2rem;
-      background-color: #f0f0f0;
-      border-top: 2px solid #ccc;
-      font-size: 0.9rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
-    a {
+    .project-card h2 {
+      margin-top: 0;
+    }
+
+    .project-card a {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
       color: #007acc;
+      text-decoration: none;
+      font-weight: bold;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
     }
 
-    .capability-box {
-      font-size: 0.95rem;
+    .project-card a:hover {
+      border-bottom: 2px solid #007acc;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Flow House</h1>
-    <nav>
-      <a href="index_zh.html">Chinese</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <h1>Oddo Zhang Projects</h1>
   </header>
-
   <main>
-    <section id="introduction">
-      <h2>Introduction</h2>
-        <p>
-          Flow House is a powerful discrete event simulation package designed to optimize complex process flows involving concurrent events.
-          It offers precise modeling of real-world processes where multiple tasks can occur simultaneously, improving efficiency and decision-making.
-          <br><br>
-          This framework is an enhancement of my earlier project, <strong>HealthCare Acute Flow</strong>.
-        </p>
-    </section>
-
-    <section id="improvements">
-      <h2>Major Improvements</h2>
-      <ul>
-        <li><strong>Multi-resource handling:</strong> Jobs can now request multiple staff members with different skills (previously limited to one job per staff).</li>
-        <li><strong>Smarter job dispatch:</strong> Updated dispatch logic to support the complexity of multi-resource handling.</li>
-        <li><strong>Petri net modeling with Snakes:</strong> Easier and more intuitive workflow design than PM4Py.</li>
-      </ul>
-    </section>
-
-    <section id="capabilities">
-      <h2>What You Can Optimize</h2>
-      <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
-        <div class="capability-box" style="flex: 0 0 calc(50% - 1rem); min-width: 300px; background: #ffffff; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-          <h3 style="margin-top: 0;">Roster Optimization</h3>
-          <p>Optimize staffing schedules to ensure coverage, balance workload, and respect shift constraints.</p>
-        </div>
-        <div class="capability-box" style="flex: 0 0 calc(50% - 1rem); min-width: 300px; background: #ffffff; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-          <h3 style="margin-top: 0;">Job Arrival Optimization</h3>
-          <p>Control and schedule incoming tasks to reduce queueing and improve flow efficiency.</p>
-        </div>
-        <div class="capability-box" style="flex: 0 0 calc(50% - 1rem); min-width: 300px; background: #ffffff; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-          <h3 style="margin-top: 0;">Workflow Strategy Optimization</h3>
-          <p>Test and improve different process paths using simulation feedback.</p>
-        </div>
-        <div class="capability-box" style="flex: 0 0 calc(50% - 1rem); min-width: 300px; background: #ffffff; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-          <h3 style="margin-top: 0;">Stress Testing</h3>
-          <p>Use the synthetic data generator to simulate high-load scenarios and evaluate system resilience.</p>
-        </div>
+    <div class="project-links">
+      <div class="project-card">
+        <h2>Flow House</h2>
+        <p>A discrete event simulation framework for process optimization using Petri nets and multi-resource dispatch.</p>
+        <a href="flow_house.html">Explore Flow House →</a>
       </div>
-    </section>
-
-    <section id="earlier-work">
-      <h2>Earlier Work: HealthCare Acute Flow</h2>
-      <p>
-        The following visuals showcase my prior work on <strong>HealthCare Acute Flow</strong>, a system designed to streamline acute care processes through simulation and data-driven insights.
-      </p>
-      <div style="display: flex; flex-direction: column; gap: 1rem;">
-        <div style="text-align: center;">
-          <img src="acute_flow_1.png" alt="Acute Flow Demo 1" style="max-width: 100%; border-radius: 8px;" />
-        </div>
-        <div style="text-align: center;">
-          <img src="actue_flow_2.png" alt="Acute Flow Demo 2" style="max-width: 100%; border-radius: 8px;" />
-        </div>
+      <div class="project-card">
+        <h2>CSimPy</h2>
+        <p>A C++ coroutine-based simulation engine inspired by SimPy, built for performance and flexibility.</p>
+        <a href="csimpy.html">Explore CSimPy →</a>
       </div>
-      <p style="font-size: 0.9rem; color: #555; text-align: right;">
-        Source: <a href="https://www.arkturushealth.co/acute-flow" target="_blank">arkturushealth.co</a>
-      </p>
-    </section>
-
-    <section id="about">
-      <h2>About Me</h2>
-      <p>I have a PhD in Operations Research and enjoy applying decision science, simulation, and optimization to solve complex scheduling and process design challenges. Besides playing with math, I also play soccer — and I believe Messi is the GOAT.</p>
-    </section>
+    </div>
   </main>
-
-  <footer id="contact">
-    <h2>Get in Touch</h2>
-    <p>Email: min.oddo[at]gmail.com</p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/oddo-zhang-phd-b155a725/" target="_blank">Oddo Zhang</p>
-  </footer>
 </body>
 </html>
