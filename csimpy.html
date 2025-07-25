@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CSimPy</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .indented-list {
+      margin-left: 2em;
+      padding-left: 1em;
+    }
+    .bullet-heading {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      padding: 4px 8px;
+      display: inline-block;
+      border-radius: 4px;
+      margin-bottom: 0.3em;
+    }
+    pre code {
+      background-color: #2d2d2d;
+      color: #f8f8f2;
+      display: block;
+      padding: 1em;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+  </style>
 </head>
 <body class="light-theme">
   <header>
@@ -18,30 +38,91 @@
   </header>
 
   <section class="intro">
-    <h2>Introduction</h2>
+    <h1>CSimPy</h1>
     <p>
-      CSimPy is a lightweight C++20 coroutine-based discrete event simulation engine, inspired by SimPy. It is designed to model asynchronous workflows and resource contention efficiently, offering better control and performance than Python-based systems in performance-critical environments.
+      CSimPy is a lightweight C++20 coroutine-based discrete event simulation engine, inspired by SimPy. It is designed to model asynchronous workflows and resource contention in a SimPy-style API, bringing familiar concepts into the C++ ecosystem. The framework aims to give researchers and students a practical and fun way to explore discrete event simulation with modern C++20 coroutines.
     </p>
-    <p>
-      The framework enables you to define coroutine-based processes that wait for events, interact with resources, and yield control based on simulation time.
-    </p>
+  </section>
+
+  <section class="core-components">
+    <h2>📦 Core Components</h2>
+
+    <h3>1. <code>CSimpyEnv</code></h3>
+    <p><span class="bullet-heading">The simulation environment. It manages:</span></p>
+    <ul class="indented-list">
+      <li><code>sim_time</code>: the current simulation clock</li>
+      <li><code>event_queue</code>: a priority queue of scheduled <code>SimEvent</code>s</li>
+      <li><code>schedule()</code>: inserts events into the queue based on their <code>sim_time</code></li>
+      <li>Advances simulation time and processes events when triggered</li>
+    </ul>
+
+    <h3>2. <code>SimEvent</code></h3>
+    <p><span class="bullet-heading">Base class for events. Supports:</span></p>
+    <ul class="indented-list">
+      <li>Callback registration</li>
+      <li>Coroutine suspension and resumption</li>
+      <li>Manual or automatic triggering</li>
+    </ul>
+
+    <h3>3. <code>SimDelay</code></h3>
+    <p>A subclass of <code>SimEvent</code> for time-based delays.</p>
+
+    <h3>4. <code>CoroutineProcess</code></h3>
+    <p>Wraps coroutine handles as simulation tasks. Scheduled in the event queue for resumption.</p>
+
+    <h3>5. <code>AllOfEvent</code></h3>
+    <p>An event that waits on multiple other <code>SimEvent</code>s. Completes when all dependencies have triggered.</p>
+  </section>
+
+  <section class="examples">
+
+    <h3>Example</h3>
+    <pre><code>#include "csimpy_env.h"
+
+CSimpyEnv env;
+Task wait_example = env.create_task([]() -> Task {
+    std::cout << "[" << env.sim_time << "] wait_example started\n";
+    co_await SimDelay(env, 15);
+    std::cout << "[" << env.sim_time << "] wait_example finished\n";
+});
+
+int main() {
+    env.schedule(wait_example, "proc_c");
+    env.run();
+    return 0;
+}</code></pre>
   </section>
 
   <section class="features">
-    <h2>Key Features</h2>
-    <ul>
-      <li>Native C++20 coroutine support</li>
-      <li>Efficient event queue for large-scale simulation</li>
-      <li>Support for resource acquisition and release semantics</li>
-      <li>Customizable simulation clock and event scheduling</li>
+    <h2>Features</h2>
+    <p><span class="bullet-heading">Event-driven simulation with coroutine support</span></p>
+    <ul class="indented-list">
+      <li>Event-driven simulation with coroutine support</li>
+      <li>Flexible event scheduling and cancellation</li>
+      <li>Support for complex event dependencies</li>
+      <li>Lightweight and easy to integrate</li>
     </ul>
   </section>
 
-  <section class="applications">
-    <h2>Applications</h2>
-    <p>
-      CSimPy is suitable for simulating manufacturing workflows, embedded systems, queueing networks, and more—where performance, concurrency, and low-level control are essential.
-    </p>
+  <section class="usage">
+    <h2>Usage</h2>
+    <p>Include the CSimPy headers in your project and link against the library. Use <code>CSimpyEnv</code> to create simulation environments, define your events and processes, and run the simulation loop.</p>
+  </section>
+
+  <section class="todo">
+    <h2>TODO</h2>
+    <p><span class="bullet-heading">Enhance event cancellation mechanisms</span></p>
+    <ul class="indented-list">
+      <li>Enhance event cancellation mechanisms</li>
+      <li>Add more examples and documentation</li>
+      <li>Implement resource management primitives</li>
+      <li>Optimize event queue performance</li>
+    </ul>
+  </section>
+
+  <section class="author">
+    <h2>Author</h2>
+    <p>© 2025 Oddo Zhang</p>
   </section>
 
   <footer>
