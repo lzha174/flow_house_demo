@@ -18,7 +18,6 @@
     header {
       background-color: #fff;
       padding: 1.5rem 1rem;
-      text-align: center;
       border-bottom: 3px solid #333;
     }
 
@@ -40,6 +39,43 @@
       font-size: 1.1rem;
     }
 
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    .about-me, .project-links {
+      background: none;
+      padding: 0;
+      border: none;
+    }
+
+    .about-me h2, .project-links h2 {
+      text-align: left;
+      margin-left: 0;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+
+    .project-card {
+      flex: 1 1 calc(50% - 2rem);
+      background: #f9f9f9;
+      padding: 1.5rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .project-card h3 {
+      margin-top: 0;
+    }
+
     section {
       margin: 3rem auto;
       padding: 2rem;
@@ -54,6 +90,7 @@
       margin-bottom: 1rem;
       border-bottom: 1px solid #ccc;
       padding-bottom: 0.5rem;
+      text-align: left;
     }
 
     ul {
@@ -85,83 +122,30 @@
   </style>
 </head>
 <body>
-  <header>
-    <h1>Flow House</h1>
-    <nav>
-      <a href="index.html">English</a>
-      <a href="#contact">联系</a>
-    </nav>
-  </header>
-
+  <div style="position:absolute; top:20px; right:20px;">
+    <select onchange="location = this.value;" style="padding:4px 8px; font-size:0.9em; background-color:#fff; color:#222; border:1px solid #ccc; border-radius:4px;">
+      <option value="index.html">English</option>
+      <option value="index_zh.html" selected>中文</option>
+    </select>
+  </div>
   <main>
-    <section id="introduction">
-      <h2>介绍</h2>
-        <p>
-          Flow House 是一个强大的离散事件仿真工具，旨在优化包含并发事件的复杂流程。它能够精确建模现实世界中的并发任务，从而提升效率和决策质量。
-          <br><br>
-          该框架是在我之前的项目 <strong>HealthCare Acute Flow</strong> 基础上的增强版。
-        </p>
+    <section class="about-me">
+      <h2>👨‍💻 关于我</h2>
+      <p>我是一个在新西兰生活了20年的山西小伙儿，喝了很多新西兰牛奶，但也忘不了山西老陈醋，热衷于用决策科学解决实际问题。</p>
     </section>
-
-    <section id="improvements">
-      <h2>主要改进</h2>
-      <ul>
-        <li><strong>多资源处理：</strong>任务现在可以请求具备不同技能的多个员工（之前只支持一人一任务）。</li>
-        <li><strong>更智能的任务调度：</strong>更新了调度逻辑以支持多资源处理的复杂性。</li>
-        <li><strong>使用 Snakes 进行 Petri 网建模：</strong>比 PM4Py 更简单直观。</li>
-      </ul>
-    </section>
-
-    <section id="capabilities">
-      <h2>可优化内容</h2>
-      <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
-        <div class="capability-box" style="flex: 0 0 calc(50% - 1rem); min-width: 300px; background: #ffffff; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-          <h3 style="margin-top: 0;">排班优化</h3>
-          <p>优化员工排班，确保覆盖率，平衡工作量，并遵守班次限制。</p>
-        </div>
-        <div class="capability-box" style="flex: 0 0 calc(50% - 1rem); min-width: 300px; background: #ffffff; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-          <h3 style="margin-top: 0;">任务到达优化</h3>
-          <p>控制和安排任务到达，减少排队，提高流程效率。</p>
-        </div>
-        <div class="capability-box" style="flex: 0 0 calc(50% - 1rem); min-width: 300px; background: #ffffff; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-          <h3 style="margin-top: 0;">流程策略优化</h3>
-          <p>通过仿真反馈测试和改进不同流程路径。</p>
-        </div>
-        <div class="capability-box" style="flex: 0 0 calc(50% - 1rem); min-width: 300px; background: #ffffff; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-          <h3 style="margin-top: 0;">压力测试</h3>
-          <p>使用合成数据生成器模拟高负载场景，评估系统韧性。</p>
-        </div>
+    <h2 class="project-links">📂 最近个人兴趣作品</h2>
+    <div class="project-links">
+      <div class="project-card">
+        <h3>Flow House</h3>
+        <p>基于Simpy的工作流程优化仿真软件。</p>
+        <a href="flow_house_zh.html">探索 Flow House →</a>
       </div>
-    </section>
-
-    <section id="earlier-work">
-      <h2>早期项目：HealthCare Acute Flow</h2>
-      <p>
-        以下图片展示了我早期项目 <strong>HealthCare Acute Flow</strong> 的部分模拟和可视化效果。
-      </p>
-      <div style="display: flex; flex-direction: column; gap: 1rem;">
-        <div style="text-align: center;">
-          <img src="acute_flow_1.png" alt="Acute Flow Demo 1" style="max-width: 100%; border-radius: 8px;" />
-        </div>
-        <div style="text-align: center;">
-          <img src="actue_flow_2.png" alt="Acute Flow Demo 2" style="max-width: 100%; border-radius: 8px;" />
-        </div>
+      <div class="project-card">
+        <h3>CSimPy</h3>
+        <p>受SimPy启发的基于C++20协程开源仿真引擎。</p>
+        <a href="csimpy_zh.html">探索 CSimPy →</a>
       </div>
-      <p style="font-size: 0.9rem; color: #555; text-align: right;">
-        来源：<a href="https://www.arkturushealth.co/acute-flow" target="_blank">arkturushealth.co</a>
-      </p>
-    </section>
-
-    <section id="about">
-      <h2>关于我</h2>
-      <p>热衷于将决策科学、仿真与优化方法应用于实际问题的新西兰山西人。</p>
-    </section>
+    </div>
   </main>
-
-  <footer id="contact">
-    <h2>联系我</h2>
-    <p>邮箱: min.oddo[at]gmail.com</p>
-    <p>领英: <a href="https://www.linkedin.com/in/oddo-zhang-phd-b155a725/" target="_blank">Oddo Zhang</a></p>
-  </footer>
 </body>
 </html>

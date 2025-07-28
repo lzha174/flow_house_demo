@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CSimPy</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .indented-list {
+      margin-left: 2em;
+      padding-left: 1em;
+    }
+    .bullet-heading {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      padding: 4px 8px;
+      display: inline-block;
+      border-radius: 4px;
+      margin-bottom: 0.3em;
+    }
+    pre code {
+      background-color: #2d2d2d;
+      color: #f8f8f2;
+      display: block;
+      padding: 1em;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body class="light-theme">
+  <header>
+    <h1>CSimPy</h1>
+    <nav>
+      <a href="index_zh.html">Flow House</a>
+      <a href="csimpy_zh.html">CSimPy</a>
+    </nav>
+  </header>
+  <div style="position:absolute; top:40px; right:20px;">
+    <a href="index_zh.html" 
+       style="display:inline-block; padding:6px 12px; background-color:#ffffff; color:#222; 
+              text-decoration:none; border-radius:4px; font-size:0.9em; border:1px solid #ccc;">
+      ← 返回首页
+    </a>
+  </div>
+
+  <section class="intro">
+    <h1>CSimPy <a href="https://github.com/lzha174/csimpy" target="_blank" style="font-size:0.5em; margin-left:10px;">(GitHub)</a></h1>
+    <p>
+      CSimPy 是一个轻量级的基于 C++20 协程的离散事件仿真引擎，灵感来自 SimPy。
+      它旨在用 SimPy 风格的 API 模拟异步工作流和资源竞争，将熟悉的概念带入 C++ 生态系统。
+      该框架为研究人员和学生提供了一种使用现代 C++20 协程探索离散事件仿真的实用且有趣的方式。
+    </p>
+  </section>
+
+  <section class="core-components">
+    <h2>📦 核心组件</h2>
+
+    <h3>1. <code>CSimpyEnv</code></h3>
+    <p><span class="bullet-heading">仿真环境，负责管理：</span></p>
+    <ul class="indented-list">
+      <li><code>sim_time</code>: 当前仿真时间</li>
+      <li><code>event_queue</code>: 模拟事件队列</li>
+      <li><code>schedule()</code>: 根据 <code>sim_time</code> 将事件插入队列</li>
+      <li>推进仿真时间并根据事件触发事件进行模拟</li>
+    </ul>
+
+    <h3>2. <code>SimEvent</code></h3>
+    <p><span class="bullet-heading">事件基类，支持：</span></p>
+    <ul class="indented-list">
+      <li>回调注册</li>
+      <li>进程挂起和恢复</li>
+      <li>手动或自动触发</li>
+    </ul>
+
+    <h3>3. <code>SimDelay</code></h3>
+    <p><code>SimEvent</code> 的子类，用于基于时间的延迟。</p>
+
+    <h3>4. <code>CoroutineProcess</code></h3>
+    <p>将协程封装为仿真任务，在事件队列中调度以恢复。</p>
+
+    <h3>5. <code>AllOfEvent</code></h3>
+    <p>等待多个 <code>SimEvent</code> 完成的事件，当所有依赖触发时完成。</p>
+
+    <h3>6. <code>AnyOfEvent</code></h3>
+    <p>等待多个 <code>SimEvent</code> 的事件，只要其中任何一个触发就立即完成，并移除其他事件的回调。</p>
+
+    <h3>7. <code>Container</code></h3>
+    <p>支持 <code>put()</code> 和 <code>get()</code> 操作的资源容器，具有容量限制。适用于模拟库存、流体等可消耗或可生产的资源。</p>
+  </section>
+
+  <section class="examples">
+    <h3>📖 示例</h3>
+    <pre><code>/**
+ * 简单示例：演示基于协程的延迟事件。
+ * 创建一个等待 15 个时间单位的任务，使用 SimDelay，
+ * 在开始和结束时打印消息，并运行仿真。
+ */
+#include "csimpy_env.h"
+
+CSimpyEnv env;
+Task wait_example = env.create_task([]() -> Task {
+    std::cout << "[" << env.sim_time << "] wait_example 开始\n";
+    co_await SimDelay(env, 15);
+    std::cout << "[" << env.sim_time << "] wait_example 结束\n";
+});
+
+int main() {
+    env.schedule(wait_example, "wait_example");
+    env.run();
+    return 0;
+}</code></pre>
+    <h4>输出:</h4>
+    <pre><code>[0] wait_example 开始
+[15] wait_example 结束</code></pre>
+  </section>
+
+  <section class="features">
+    <h2>⚡ 特性</h2>
+    <ul class="indented-list">
+      <li>基于事件的协程仿真</li>
+      <li>灵活的事件调度</li>
+      <li>支持复杂的事件依赖</li>
+      <li>原生支持异步和并行事件</li>
+      <li>轻量且易于集成</li>
+    </ul>
+  </section>
+
+  <section class="usage">
+    <h2>🔧 用法</h2>
+    <p>在项目中包含 CSimPy 头文件。使用 <code>CSimpyEnv</code> 创建仿真环境，定义事件和进程，并运行仿真循环。</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Lei (Oddo) Zhang</p>
+    <p><a href="https://github.com/lzha174/csimpy" target="_blank">查看 GitHub</a></p>
+  </footer>
+</body>
+</html>

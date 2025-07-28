@@ -26,6 +26,9 @@
       border-radius: 4px;
       overflow-x: auto;
     }
+    header a[href="index.html"]:hover {
+      background-color: #0056b3;
+    }
   </style>
 </head>
 <body class="light-theme">
@@ -36,9 +39,16 @@
       <a href="csimpy.html">CSimPy</a>
     </nav>
   </header>
+  <div style="position:absolute; top:40px; right:20px;">
+    <a href="index.html" 
+       style="display:inline-block; padding:6px 12px; background-color:#ffffff; color:#222; 
+              text-decoration:none; border-radius:4px; font-size:0.9em; border:1px solid #ccc;">
+      ← Back to Home
+    </a>
+  </div>
 
   <section class="intro">
-    <h1>CSimPy</h1>
+    <h1>CSimPy <a href="https://github.com/lzha174/csimpy" target="_blank" style="font-size:0.5em; margin-left:10px;">(GitHub)</a></h1>
     <p>
       CSimPy is a lightweight C++20 coroutine-based discrete event simulation engine, inspired by SimPy. It is designed to model asynchronous workflows and resource contention in a SimPy-style API, bringing familiar concepts into the C++ ecosystem. The framework aims to give researchers and students a practical and fun way to explore discrete event simulation with modern C++20 coroutines.
     </p>
@@ -60,7 +70,7 @@
     <p><span class="bullet-heading">Base class for events. Supports:</span></p>
     <ul class="indented-list">
       <li>Callback registration</li>
-      <li>Coroutine suspension and resumption</li>
+      <li>Process suspension and resumption</li>
       <li>Manual or automatic triggering</li>
     </ul>
 
@@ -72,12 +82,23 @@
 
     <h3>5. <code>AllOfEvent</code></h3>
     <p>An event that waits on multiple other <code>SimEvent</code>s. Completes when all dependencies have triggered.</p>
+
+    <h3>6. <code>AnyOfEvent</code></h3>
+    <p>An event that waits on multiple other <code>SimEvent</code>s. Completes as soon as any one of the dependencies triggers and removes callbacks from the remaining events.</p>
+
+    <h3>7. <code>Container</code></h3>
+    <p>A resource container supporting <code>put()</code> and <code>get()</code> operations with capacity constraints. Useful for modeling consumable or producible resources like inventory or fluids in simulations.</p>
   </section>
 
   <section class="examples">
 
-    <h3>Example</h3>
-    <pre><code>#include "csimpy_env.h"
+    <h3>📖 Example</h3>
+    <pre><code>/**
+ * Simple example demonstrating a coroutine-based delay event.
+ * Creates a task that waits 15 time units using SimDelay,
+ * prints messages at the start and end, and runs the simulation.
+ */
+#include "csimpy_env.h"
 
 CSimpyEnv env;
 Task wait_example = env.create_task([]() -> Task {
@@ -87,46 +108,35 @@ Task wait_example = env.create_task([]() -> Task {
 });
 
 int main() {
-    env.schedule(wait_example, "proc_c");
+    env.schedule(wait_example, "wait_example");
     env.run();
     return 0;
 }</code></pre>
+    <h4>Output:</h4>
+    <pre><code>[0] wait_example started
+[15] wait_example finished</code></pre>
   </section>
 
   <section class="features">
-    <h2>Features</h2>
-    <p><span class="bullet-heading">Event-driven simulation with coroutine support</span></p>
+    <h2>⚡ Features</h2>
     <ul class="indented-list">
       <li>Event-driven simulation with coroutine support</li>
-      <li>Flexible event scheduling and cancellation</li>
+      <li>Flexible event scheduling</li>
       <li>Support for complex event dependencies</li>
+      <li>Native support for asynchronous and parallel events</li>
       <li>Lightweight and easy to integrate</li>
     </ul>
   </section>
 
   <section class="usage">
-    <h2>Usage</h2>
-    <p>Include the CSimPy headers in your project and link against the library. Use <code>CSimpyEnv</code> to create simulation environments, define your events and processes, and run the simulation loop.</p>
+    <h2>🔧 Usage</h2>
+    <p>Include the CSimPy headers in your project. Use <code>CSimpyEnv</code> to create simulation environment, define your events and processes, and run the simulation loop.</p>
   </section>
 
-  <section class="todo">
-    <h2>TODO</h2>
-    <p><span class="bullet-heading">Enhance event cancellation mechanisms</span></p>
-    <ul class="indented-list">
-      <li>Enhance event cancellation mechanisms</li>
-      <li>Add more examples and documentation</li>
-      <li>Implement resource management primitives</li>
-      <li>Optimize event queue performance</li>
-    </ul>
-  </section>
-
-  <section class="author">
-    <h2>Author</h2>
-    <p>© 2025 Oddo Zhang</p>
-  </section>
 
   <footer>
-    <p>&copy; 2025 Oddo </p>
+    <p>&copy; 2025 Oddo Zhang </p>
+    <p><a href="https://github.com/lzha174/csimpy" target="_blank">View on GitHub</a></p>
   </footer>
 </body>
 </html>

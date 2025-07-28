@@ -19,7 +19,6 @@
       background-color: #fff;
       padding: 2rem 1rem 1rem;
       text-align: center;
-      border-bottom: 3px solid #333;
     }
 
     header h1 {
@@ -69,18 +68,26 @@
   </style>
 </head>
 <body>
-  <header>
-    <h1>Oddo Zhang Projects</h1>
-  </header>
+  <div style="position:absolute; top:20px; right:20px;">
+    <select onchange="location = this.value;" style="padding:4px 8px; font-size:0.9em;">
+      <option value="index.html" selected>English</option>
+      <option value="index_zh.html">中文</option>
+    </select>
+  </div>
   <main>
+    <section class="about-me">
+      <h2>👨‍💻 About Me</h2>
+      <p>I am a Chinese dude who spent 20 years in New Zealand and drank a lot of NZ milk. I hold a PhD in Operations Research and love using decision science to solve real-world problems. I play with math, I play soccer, and I think Messi is the GOAT.</p>
+    </section>
+    <h2>📂 Recent Work</h2>
     <div class="project-links">
       <div class="project-card">
-        <h2>Flow House</h2>
-        <p>A discrete event simulation framework for process optimization using Petri nets and multi-resource dispatch.</p>
+        <h3>Flow House</h3>
+        <p>A discrete event simulation framework for process optimization based on Simpy.</p>
         <a href="flow_house.html">Explore Flow House →</a>
       </div>
       <div class="project-card">
-        <h2>CSimPy</h2>
+        <h3>CSimPy</h3>
         <p>A C++ coroutine-based simulation engine inspired by SimPy, built for performance and flexibility.</p>
         <a href="csimpy.html">Explore CSimPy →</a>
       </div>
