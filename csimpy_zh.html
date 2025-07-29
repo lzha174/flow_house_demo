@@ -87,6 +87,13 @@
 
     <h3>7. <code>Container</code></h3>
     <p>支持 <code>put()</code> 和 <code>get()</code> 操作的资源容器，具有容量限制。适用于模拟库存、流体等可消耗或可生产的资源。</p>
+
+    <h3>8. <code>Store</code></h3>
+    <p>
+      一个用于存储 <code>ItemBase</code> 派生对象的资源仓库，具有容量限制。
+      支持 <code>put()</code> 和 <code>get()</code> 操作，使用协程 <code>co_await</code>。
+      <code>get()</code> 方法可以接受筛选 Lambda 以选择特定的条目，类似于 SimPy 的 FilterStore。
+    </p>
   </section>
 
   <section class="examples">
@@ -113,6 +120,47 @@ int main() {
     <h4>输出:</h4>
     <pre><code>[0] wait_example 开始
 [15] wait_example 结束</code></pre>
+
+    <h3>📖 Store 示例</h3>
+    <pre><code>// 演示 Store 用法：放入两个 StaffItem，然后使用过滤器按 ID 获取一个。
+#include "csimpy_env.h"
+
+CSimpyEnv env;
+Store store(env, 5);
+
+Task store_task = env.create_task([&env, &store]() -> Task {
+    StaffItem alice("Alice", 1, "Nurse", 2);
+    StaffItem bob("Bob", 2, "Doctor", 3);
+
+    std::cout << "[" << env.sim_time << "] 放入 Alice\n";
+    co_await store.put(alice);
+    std::cout << "[" << env.sim_time << "] 放入 Bob\n";
+    co_await store.put(bob);
+
+    std::cout << "[" << env.sim_time << "] 获取 id == 2 的条目\n";
+    auto item = co_await store.get([](const std::shared_ptr<ItemBase>& it) {
+        return it->id == 2;
+    });
+    std::cout << "[" << env.sim_time << "] 已获取: " << item->to_string() << std::endl;
+
+    std::cout << "[" << env.sim_time << "] 获取下一个可用条目（无过滤器）\n";
+    auto next_item = co_await store.get();
+    std::cout << "[" << env.sim_time << "] 已获取: " << next_item->to_string() << std::endl;
+});
+
+int main() {
+    env.schedule(store_task, "store_task");
+    env.run();
+    return 0;
+}
+    </code></pre>
+    <h4>输出:</h4>
+    <pre><code>[1] 放入 Alice
+[1] 放入 Bob
+[1] 获取 id == 2 的条目
+[1] 已获取: StaffItem(Bob, id=2, role=Doctor, skill=3)
+[1] 获取下一个可用条目（无过滤器）
+[1] 已获取: StaffItem(Alice, id=1, role=Nurse, skill=2)</code></pre>
   </section>
 
   <section class="features">

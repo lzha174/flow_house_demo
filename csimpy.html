@@ -88,6 +88,13 @@
 
     <h3>7. <code>Container</code></h3>
     <p>A resource container supporting <code>put()</code> and <code>get()</code> operations with capacity constraints. Useful for modeling consumable or producible resources like inventory or fluids in simulations.</p>
+
+    <h3>8. <code>Store</code></h3>
+    <p>
+      A resource store for holding <code>ItemBase</code>-derived objects with limited capacity.
+      Supports asynchronous <code>put()</code> and <code>get()</code> operations with coroutine <code>co_await</code>.
+      The <code>get()</code> method can accept a filter lambda to select specific items, similar to SimPy's FilterStore.
+    </p>
   </section>
 
   <section class="examples">
@@ -115,6 +122,48 @@ int main() {
     <h4>Output:</h4>
     <pre><code>[0] wait_example started
 [15] wait_example finished</code></pre>
+
+    <h3>📖 Store Example</h3>
+    <pre><code>
+// Demonstrates Store usage with putting items and retrieving one using a filter by ID.
+#include "csimpy_env.h"
+
+CSimpyEnv env;
+Store store(env, 5);
+
+Task store_task = env.create_task([&env, &store]() -> Task {
+    StaffItem alice("Alice", 1, "Nurse", 2);
+    StaffItem bob("Bob", 2, "Doctor", 3);
+
+    std::cout << "[" << env.sim_time << "] Putting Alice\n";
+    co_await store.put(alice);
+    std::cout << "[" << env.sim_time << "] Putting Bob\n";
+    co_await store.put(bob);
+
+    std::cout << "[" << env.sim_time << "] Getting item with id == 2\n";
+    auto item = co_await store.get([](const std::shared_ptr<ItemBase>& it) {
+        return it->id == 2;
+    });
+    std::cout << "[" << env.sim_time << "] Got item: " << item->to_string() << std::endl;
+
+    std::cout << "[" << env.sim_time << "] Getting next available item (no filter)\n";
+    auto next_item = co_await store.get();
+    std::cout << "[" << env.sim_time << "] Got item: " << next_item->to_string() << std::endl;
+});
+
+int main() {
+    env.schedule(store_task, "store_task");
+    env.run();
+    return 0;
+}
+    </code></pre>
+    <h4>Output:</h4>
+    <pre><code>[1] Putting Alice
+[1] Putting Bob
+[1] Getting item with id == 2
+[1] Got item: StaffItem(Bob, id=2, role=Doctor, skill=3)
+[1] Getting next available item (no filter)
+[1] Got item: StaffItem(Alice, id=1, role=Nurse, skill=2)</code></pre>
   </section>
 
   <section class="features">
